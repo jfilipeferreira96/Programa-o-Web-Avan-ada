@@ -10,6 +10,10 @@ https://jfilipeferreira96.github.io/MiniProj1
 
 https://www.figma.com/file/ccfCrXEpUyghNnm44qTINA/MiniProj1---Jos%C3%A9-Filipe-Ferreira?node-id=0%3A1
 
+## This project is original located at:
+
+https://github.com/jfilipeferreira96/MiniProj1
+
 ## Aluno: José Filipe Ferreira (utad80112)
 
 &nbsp;
