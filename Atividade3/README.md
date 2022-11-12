@@ -2,6 +2,8 @@
 
 These files contain a working prototype of the Animalec project, two new pages have been added containing sponsors and animal experts.
 
+The main objetive of this project was to make use of the HTML5 tags e.g: Header, Section, Footer
+
 ### Wireframe:
 
 https://www.figma.com/file/Kju9TnYQ55Ge0HspM3n4J4/WireFrame---Animalec---Jos%C3%A9-Filipe-Ferreira
