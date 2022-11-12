@@ -1,6 +1,6 @@
 ## About:
 
-These files contain a working prototype of the Animalec project, two new pages containing sponsors and animal experts have been added.
+These files contain a working prototype of the Animalec project, two new pages have been added containing sponsors and animal experts.
 
 ### Wireframe:
 
