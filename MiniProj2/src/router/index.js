@@ -47,7 +47,7 @@ const routes = [
   {
     path: "/admin/sponsors",
     name: "listSponsors",
-    component: () => import("@/views/questions/ListQuestions.vue"),
+    component: () => import("@/views/sponsors/ListSponsors.vue"),
   },
   {
     path: "/admin/experts",
