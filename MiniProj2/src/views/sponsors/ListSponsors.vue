@@ -31,8 +31,8 @@
                   <i class="fas fa-arrow-up" v-if="sortType === 1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
-                <th scope="col">TIPO</th>
-                <th scope="col">DATA DE CRIAÇÃO</th>
+                <th scope="col">CONTACTO</th>
+                <th scope="col">ANIMAL PATROCIONADO</th>
                 <th scope="col">AÇÕES</th>
               </tr>
             </thead>

@@ -146,7 +146,7 @@ import router from "@/router";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "EditUser",
+  name: "EditExpert",
   components: {
     HeaderPage
   },
@@ -160,14 +160,14 @@ export default {
   },
   methods: {
     update() {
-      this.$store.dispatch(`user/${EDIT_USER}`, this.$data.user).then(
+      this.$store.dispatch(`expert/${EDIT_USER}`, this.$data.user).then(
         () => {
           this.$alert(
             this.getMessage,
-            "Utilizador atualizado!",
+            "Expert atualizado!",
             "success"
           );
-          router.push({name: 'listUsers'});
+          router.push({name: 'listExperts'});
         },
         err => {
           this.$alert(`${err.message}`, "Erro", "error");

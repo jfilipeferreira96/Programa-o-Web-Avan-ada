@@ -2,7 +2,7 @@
   
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Adicionar Utilizador"/>
+      <HeaderPage title="Adicionar Sponsor"/>
      
       <!--FORM-->
       <b-row>
@@ -150,7 +150,7 @@ import router from "@/router";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "AddUser",
+  name: "AddSponsor",
    components: {
     HeaderPage
   },
@@ -181,14 +181,14 @@ export default {
           "error"
         );
       } else {
-        this.$store.dispatch(`user/${ADD_USER}`, this.$data).then(
+        this.$store.dispatch(`sponsor/${ADD_USER}`, this.$data).then(
           () => {
             this.$alert(
               this.getMessage,
               "Utilizador adicionado!",
               "success"
             );
-            router.push({name: 'listUsers'});
+            router.push({name: 'listSponsors'});
           },
           err => {
             this.$alert(`${err.message}`, "Erro", "error");

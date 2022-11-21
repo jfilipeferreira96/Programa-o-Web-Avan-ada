@@ -1,7 +1,7 @@
 <template>
   <section class="page-section">
      <b-container>
-      <HeaderPage title="Editar Utilizador"/>
+      <HeaderPage title="Editar Sponsor"/>
    
       <!--FORM-->
       <b-row>
@@ -127,7 +127,7 @@
             <button type="submit" class="btn btn-outline-success btn-lg mr-2">
               <i class="fas fa-edit"></i> ATUALIZAR</button>
             <router-link
-              :to="{name: 'listUsers'}"
+              :to="{name: 'listSponsors'}"
               tag="button"
               class="btn btn-outline-danger btn-lg"
             ><i class="fas fa-window-close"></i> CANCELAR</router-link>
@@ -146,7 +146,7 @@ import router from "@/router";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "EditUser",
+  name: "EditSponsor",
   components: {
     HeaderPage
   },
@@ -160,14 +160,14 @@ export default {
   },
   methods: {
     update() {
-      this.$store.dispatch(`user/${EDIT_USER}`, this.$data.user).then(
+      this.$store.dispatch(`sponsor/${EDIT_USER}`, this.$data.user).then(
         () => {
           this.$alert(
             this.getMessage,
-            "Utilizador atualizado!",
+            "Sponsor atualizado!",
             "success"
           );
-          router.push({name: 'listUsers'});
+          router.push({name: 'listSponsors'});
         },
         err => {
           this.$alert(`${err.message}`, "Erro", "error");

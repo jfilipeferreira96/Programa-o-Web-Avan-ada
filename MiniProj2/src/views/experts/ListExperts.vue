@@ -1,7 +1,7 @@
 <template>
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Gestão de Utilizadores" />
+      <HeaderPage title="Gestão de Experts" />
 
       <!--MENU TOPO-->
       <b-row class="mb-4">
@@ -9,7 +9,7 @@
         <b-col>
           <router-link :to="{ name: 'addUser' }" tag="button" class="btn btn-outline-success mr-2 mt-2">
             <i class="fas fa-plus-square"></i>
-            ADICIONAR UTILIZADOR
+            ADICIONAR EXPERT
           </router-link>
           <router-link :to="{ name: 'admin' }" tag="button" class="btn btn-outline-info mr-2 mt-2">
             <i class="fas fa-bars"></i>
@@ -31,8 +31,8 @@
                   <i class="fas fa-arrow-up" v-if="sortType === 1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
-                <th scope="col">TIPO</th>
-                <th scope="col">DATA DE CRIAÇÃO</th>
+                <th scope="col">CONTACTO</th>
+                <th scope="col">ÁREA ESPECIALISTA</th>
                 <th scope="col">AÇÕES</th>
               </tr>
             </thead>
@@ -137,10 +137,10 @@ export default {
       return newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
     },
     removeUser(id) {
-      this.$confirm("Se sim, clique em OK", "Deseja mesmo remover o utilizador?", "warning", { confirmButtonText: "OK", cancelButtonText: "Cancelar" }).then(
+      this.$confirm("Se sim, clique em OK", "Deseja mesmo remover o expert?", "warning", { confirmButtonText: "OK", cancelButtonText: "Cancelar" }).then(
         () => {
           this.$store.dispatch(`user/${REMOVE_USER}`, id).then(() => {
-            this.$alert(this.getMessage, "Utilizador removido!", "success");
+            this.$alert(this.getMessage, "Expert removido!", "success");
             this.fetchUsers();
           });
         },

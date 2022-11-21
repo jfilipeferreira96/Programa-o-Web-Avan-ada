@@ -2,7 +2,7 @@
   
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Adicionar Utilizador"/>
+      <HeaderPage title="Adicionar Expert"/>
      
       <!--FORM-->
       <b-row>
@@ -150,7 +150,7 @@ import router from "@/router";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "AddUser",
+  name: "AddExpert",
    components: {
     HeaderPage
   },
@@ -181,14 +181,14 @@ export default {
           "error"
         );
       } else {
-        this.$store.dispatch(`user/${ADD_USER}`, this.$data).then(
+        this.$store.dispatch(`expert/${ADD_USER}`, this.$data).then(
           () => {
             this.$alert(
               this.getMessage,
-              "Utilizador adicionado!",
+              "Expert adicionado!",
               "success"
             );
-            router.push({name: 'listUsers'});
+            router.push({name: 'listExperts'});
           },
           err => {
             this.$alert(`${err.message}`, "Erro", "error");

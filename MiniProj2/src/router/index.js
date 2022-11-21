@@ -52,7 +52,7 @@ const routes = [
   {
     path: "/admin/experts",
     name: "listExperts",
-    component: () => import("@/views/quizzes/ListQuizzes.vue"),
+    component: () => import("@/views/experts/ListExperts.vue"),
   },
   {
     path: "/admin/questions/add",
