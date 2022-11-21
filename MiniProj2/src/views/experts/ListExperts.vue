@@ -86,8 +86,8 @@ export default {
     ...mapGetters("user", ["getUsers", "getMessage"]),
   },
   methods: {
-    fetchUsers() {
-      this.$store.dispatch(`user/${FETCH_USERS}`).then(
+    fetchExperts() {
+      this.$store.dispatch(`expert/${FETCH_USERS}`).then(
         () => {
           this.users = this.getUsers;
         },
@@ -124,24 +124,17 @@ export default {
           <p>${user.description}</p>
           <p>
           <b>Nome:</b> ${user.name} <br>
-          <b>Tipo de utilizador:</b> ${user.type === "admin" ? "Administrador" : "Utilizador normal"} <br>
-          <b>Data de registo:</b> ${this.formatDate(user.registration_date)} <br>
-          <b>Data de nascimento:</b> ${this.formatDate(user.birth_date)}<br>
           <b>Cidade:</b> ${user.location.city}<br>
           <b>País:</b> ${user.location.country}
           </p>
         `;
     },
-    formatDate: (d) => {
-      const newDate = new Date(Date.parse(d));
-      return newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
-    },
     removeUser(id) {
       this.$confirm("Se sim, clique em OK", "Deseja mesmo remover o expert?", "warning", { confirmButtonText: "OK", cancelButtonText: "Cancelar" }).then(
         () => {
-          this.$store.dispatch(`user/${REMOVE_USER}`, id).then(() => {
+          this.$store.dispatch(`expert/${REMOVE_USER}`, id).then(() => {
             this.$alert(this.getMessage, "Expert removido!", "success");
-            this.fetchUsers();
+            this.fetchExperts();
           });
         },
         () => {
@@ -151,7 +144,7 @@ export default {
     },
   },
   created() {
-    this.fetchUsers();
+    this.fetchExperts();
   },
 };
 </script>

@@ -7,7 +7,7 @@
       <b-row class="mb-4">
         <b-col cols="1"></b-col>
         <b-col>
-          <router-link :to="{ name: 'addUser' }" tag="button" class="btn btn-outline-success mr-2 mt-2">
+          <router-link :to="{ name: 'addSponsor' }" tag="button" class="btn btn-outline-success mr-2 mt-2">
             <i class="fas fa-plus-square"></i>
             ADICIONAR SPONSOR
           </router-link>
@@ -86,8 +86,8 @@ export default {
     ...mapGetters("user", ["getUsers", "getMessage"]),
   },
   methods: {
-    fetchUsers() {
-      this.$store.dispatch(`user/${FETCH_USERS}`).then(
+    fetchSponsors() {
+      this.$store.dispatch(`sponsor/${FETCH_USERS}`).then(
         () => {
           this.users = this.getUsers;
         },
@@ -120,14 +120,9 @@ export default {
 
     generateTemplate(user) {
       return `
-          <h5>${user.gamification.points} pontos (${this.getUserLevelByPoints(user.gamification.points).name})</h5>
           <p>${user.description}</p>
           <p>
           <b>Nome:</b> ${user.name} <br>
-          <b>Tipo de utilizador:</b> ${user.type === "admin" ? "Administrador" : "Utilizador normal"} <br>
-          <b>Data de registo:</b> ${this.formatDate(user.registration_date)} <br>
-          <b>Data de nascimento:</b> ${this.formatDate(user.birth_date)}<br>
-          <b>Cidade:</b> ${user.location.city}<br>
           <b>País:</b> ${user.location.country}
           </p>
         `;
@@ -139,9 +134,9 @@ export default {
     removeUser(id) {
       this.$confirm("Se sim, clique em OK", "Deseja mesmo remover o sponsor?", "warning", { confirmButtonText: "OK", cancelButtonText: "Cancelar" }).then(
         () => {
-          this.$store.dispatch(`user/${REMOVE_USER}`, id).then(() => {
+          this.$store.dispatch(`sponsor/${REMOVE_USER}`, id).then(() => {
             this.$alert(this.getMessage, "Sponsor removido!", "success");
-            this.fetchUsers();
+            this.fetchSponsors();
           });
         },
         () => {
@@ -151,7 +146,7 @@ export default {
     },
   },
   created() {
-    this.fetchUsers();
+    this.fetchSponsors();
   },
 };
 </script>

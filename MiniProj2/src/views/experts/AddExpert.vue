@@ -129,7 +129,7 @@
               <i class="fas fa-plus-square"></i> ADICIONAR
             </button>
             <router-link
-              :to="{name: 'listUsers'}"
+              :to="{name: 'listExperts'}"
               tag="button"
               class="btn btn-outline-danger btn-lg"
             >

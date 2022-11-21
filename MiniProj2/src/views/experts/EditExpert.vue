@@ -127,7 +127,7 @@
             <button type="submit" class="btn btn-outline-success btn-lg mr-2">
               <i class="fas fa-edit"></i> ATUALIZAR</button>
             <router-link
-              :to="{name: 'listUsers'}"
+              :to="{name: 'listExperts'}"
               tag="button"
               class="btn btn-outline-danger btn-lg"
             ><i class="fas fa-window-close"></i> CANCELAR</router-link>
