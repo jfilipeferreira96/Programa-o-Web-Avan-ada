@@ -82,7 +82,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getUserLevelByPoints"]),
     ...mapGetters("user", ["getUsers", "getMessage"]),
   },
   methods: {
@@ -120,7 +119,6 @@ export default {
 
     generateTemplate(user) {
       return `
-          <h5>${user.gamification.points} pontos (${this.getUserLevelByPoints(user.gamification.points).name})</h5>
           <p>${user.description}</p>
           <p>
           <b>Nome:</b> ${user.name} <br>

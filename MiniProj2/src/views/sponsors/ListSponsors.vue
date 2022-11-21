@@ -82,7 +82,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getUserLevelByPoints"]),
     ...mapGetters("user", ["getUsers", "getMessage"]),
   },
   methods: {
