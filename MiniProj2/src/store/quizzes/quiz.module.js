@@ -1,90 +1,86 @@
 import quizService from "@/api/quiz.service";
-import { 
+import {
   // Actions
   FETCH_QUIZZES,
   ADD_QUIZ,
   EDIT_QUIZ,
   REMOVE_QUIZ,
-  // Mutations 
+  // Mutations
   SET_QUIZZES,
-  SET_MESSAGE 
+  SET_MESSAGE,
 } from "./quiz.constants";
 
 const state = {
   quizzes: [],
-  message: ""
+  message: "",
 };
 
 const getters = {
-  getQuizzes: state => state.quizzes,
-  getQuizById: state => id => {
-    return state.quizzes.find(quiz => quiz._id === id)
+  getQuizzes: (state) => state.quizzes,
+  getQuizById: (state) => (id) => {
+    return state.quizzes.find((quiz) => quiz._id === id);
   },
-  getMessage: state => state.message
+  getMessage: (state) => state.message,
 };
 
 const actions = {
   [FETCH_QUIZZES]: async ({ commit, rootState }) => {
     return new Promise((resolve, reject) => {
-      quizService.getQuizzes(rootState.auth.token)
-        .then(
-          res => {
-            commit(SET_QUIZZES, res.body);
-            resolve(res)
-          },
-          err => {
-            commit(SET_MESSAGE, err.message)
-            reject(err)
-          }
-        );
+      quizService.getQuizzes(rootState.auth.token).then(
+        (res) => {
+          commit(SET_QUIZZES, res.body);
+          resolve(res);
+        },
+        (err) => {
+          commit(SET_MESSAGE, err.message);
+          reject(err);
+        }
+      );
     });
   },
   [ADD_QUIZ]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      quizService.addQuiz(rootState.auth.token, payload)
-        .then(
-          res => {
-            commit(SET_MESSAGE, "sucesso!");
-            resolve(res.body) 
-          },
-          err => {
-            commit(SET_MESSAGE, err.message)
-            reject(err)
-          }
-        );
+      quizService.addQuiz(rootState.auth.token, payload).then(
+        (res) => {
+          commit(SET_MESSAGE, "sucesso!");
+          resolve(res.body);
+        },
+        (err) => {
+          commit(SET_MESSAGE, err.message);
+          reject(err);
+        }
+      );
     });
   },
   [EDIT_QUIZ]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      quizService.editQuiz(rootState.auth.token, payload)
-        .then(
-          res => {
-            commit(SET_MESSAGE, "sucesso!");
-            resolve(res)
-          },
-          err => {
-            commit(SET_MESSAGE, err.message)
-            reject(err)
-          }
-        );
+      quizService.editQuiz(rootState.auth.token, payload).then(
+        (res) => {
+          commit(SET_MESSAGE, "sucesso!");
+          resolve(res);
+        },
+        (err) => {
+          commit(SET_MESSAGE, err.message);
+          reject(err);
+        }
+      );
     });
   },
   [REMOVE_QUIZ]: ({ commit, rootState }, id) => {
     return new Promise((resolve, reject) => {
-      quizService.removeQuiz(rootState.auth.token, id)
-        .then(
-          res => {
-            commit(SET_MESSAGE, "sucesso!");
-            resolve(res)
-          },
-          err => {
-            commit(SET_MESSAGE, err.message)
-            reject(err)
-          }
-        );
-      });
-    }
-  };
+      quizService.removeQuiz(rootState.auth.token, id).then(
+        (res) => {
+          commit(SET_MESSAGE, "sucesso!");
+          resolve(res);
+        },
+        (err) => {
+          commit(SET_MESSAGE, err.message);
+          reject(err);
+        }
+      );
+    });
+  },
+};
 
 export const mutations = {
   [SET_QUIZZES]: (state, quizzes) => {
@@ -92,7 +88,7 @@ export const mutations = {
   },
   [SET_MESSAGE]: (state, message) => {
     state.message = message;
-  }
+  },
 };
 
 export default {
@@ -100,5 +96,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
-}
+  mutations,
+};

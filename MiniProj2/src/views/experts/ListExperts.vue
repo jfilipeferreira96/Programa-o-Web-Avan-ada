@@ -108,20 +108,19 @@ export default {
     viewExpert(id) {
       const expert = this.experts.find((expert) => expert._id === id);
       this.$fire({
-        title: expert.auth.expertname,
+        title: `<strong>${expert.name}</strong>`,
         html: this.generateTemplate(expert),
         imageUrl: require(`@/assets/avatars/expert.png`),
-        imageWidth: 150,
-        imageHeight: 150,
+        imageWidth: 110,
+        imageHeight: 180,
         imageAlt: "Expert Logo",
       });
     },
 
     generateTemplate(expert) {
       return `
-          <p>${expert.especialidade}</p>
+          <h5>Especialista em:</h5><h4>${expert.especialidade}</h4>
           <p>
-          <b>Nome:</b> ${expert.name} <br>
           <b>Contacto:</b> ${expert.contato}
           </p>
         `;

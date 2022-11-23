@@ -110,7 +110,7 @@ export default {
     viewSponsor(id) {
       const sponsor = this.sponsors.find((sponsor) => sponsor._id === id);
       this.$fire({
-        title: sponsor.auth.username,
+        title: `<strong>${sponsor.name}</strong>`,
         html: this.generateTemplate(sponsor),
         imageUrl: require(`@/assets/avatars/sponsor.png`),
         imageWidth: 150,
@@ -121,10 +121,10 @@ export default {
 
     generateTemplate(sponsor) {
       return `
-          <h4>${sponsor.donation} €</h4>
+          <b>Doação:</b><h4>${sponsor.donation} €</h4>
           <p>
-          <b>Nome:</b> ${sponsor.name} <br>
           <b>Contacto:</b> ${sponsor.contato}
+          <p>
           <b>Animal patrocionado:</b> ${sponsor.animal}
           </p>
         `;
@@ -145,6 +145,7 @@ export default {
   },
   created() {
     this.fetchSponsors();
+    //this.sponsors = [{ id: 1, name: "Antonio", donation: 20, contato: 9178885425, animal: "Urso" }];
   },
 };
 </script>
