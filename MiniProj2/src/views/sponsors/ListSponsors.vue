@@ -145,7 +145,6 @@ export default {
   },
   created() {
     this.fetchSponsors();
-    //this.sponsors = [{ id: 1, name: "Antonio", donation: 20, contato: 9178885425, animal: "Urso" }];
   },
 };
 </script>
