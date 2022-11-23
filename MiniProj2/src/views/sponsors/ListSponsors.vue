@@ -31,26 +31,28 @@
                   <i class="fas fa-arrow-up" v-if="sortType === 1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
+                <th scope="col">DOAÇÃO €</th>
                 <th scope="col">CONTACTO</th>
                 <th scope="col">ANIMAL PATROCIONADO</th>
                 <th scope="col">AÇÕES</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="user of users" :key="user._id">
-                <td class="pt-4">{{ user.name }}</td>
-                <td class="pt-4">{{ user.type === "admin" ? "Administrador" : "Utilizador normal" }}</td>
-                <td class="pt-4">{{ formatDate(user.registration_date) }}</td>
+              <tr v-for="sponsor of sponsors" :key="sponsor._id">
+                <td class="pt-4">{{ sponsor.name }}</td>
+                <td class="pt-4">{{ sponsor.donation }}</td>
+                <td class="pt-4">{{ sponsor.contato }}</td>
+                <td class="pt-4">{{ sponsor.animal }}</td>
                 <td>
-                  <router-link :to="{ name: 'editUser', params: { userId: user._id } }" tag="button" class="btn btn-outline-success mr-2">
+                  <router-link :to="{ name: 'editSponsor', params: { sponsorId: sponsor._id } }" tag="button" class="btn btn-outline-success mr-2">
                     <i class="fas fa-edit"></i>
                     EDITAR
                   </router-link>
-                  <button @click="viewUser(user._id)" type="button" class="btn btn-outline-success mr-2">
+                  <button @click="viewSponsor(sponsor._id)" type="button" class="btn btn-outline-success mr-2">
                     <i class="fas fa-search"></i>
                     VER
                   </button>
-                  <button @click="removeUser(user._id)" type="button" class="btn btn-outline-danger mr-2 ">
+                  <button @click="removeSponsor(sponsor._id)" type="button" class="btn btn-outline-danger mr-2 ">
                     <i class="fas fa-trash-alt"></i>
                     REMOVER
                   </button>
@@ -66,9 +68,9 @@
 </template>
 
 <script>
-import { FETCH_USERS, REMOVE_USER } from "@/store/users/user.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import { mapGetters } from "vuex";
+import { FETCH_SPONSORS, REMOVE_SPONSOR } from "@/store/sponsors/sponsor.constants";
 
 export default {
   name: "ManageSponsors",
@@ -77,18 +79,18 @@ export default {
   },
   data: function() {
     return {
-      users: [],
+      sponsors: [],
       sortType: 1,
     };
   },
   computed: {
-    ...mapGetters("user", ["getUsers", "getMessage"]),
+    ...mapGetters("sponsor", ["getSponsors", "getMessage"]),
   },
   methods: {
     fetchSponsors() {
-      this.$store.dispatch(`sponsor/${FETCH_USERS}`).then(
+      this.$store.dispatch(`sponsor/${FETCH_SPONSORS}`).then(
         () => {
-          this.users = this.getUsers;
+          this.sponsors = this.getSponsors;
         },
         (err) => {
           this.$alert(`${err.message}`, "Erro", "error");
@@ -96,7 +98,7 @@ export default {
       );
     },
     sort() {
-      this.users.sort(this.compareNames);
+      this.sponsors.sort(this.compareNames);
       this.sortType *= -1;
     },
     compareNames(u1, u2) {
@@ -105,35 +107,32 @@ export default {
       else return 0;
     },
 
-    viewUser(id) {
-      const user = this.users.find((user) => user._id === id);
+    viewSponsor(id) {
+      const sponsor = this.sponsors.find((sponsor) => sponsor._id === id);
       this.$fire({
-        title: user.auth.username,
-        html: this.generateTemplate(user),
-        imageUrl: require(`@/assets/avatars/${this.getUserLevelByPoints(user.gamification.points).avatar}.png`),
+        title: sponsor.auth.username,
+        html: this.generateTemplate(sponsor),
+        imageUrl: require(`@/assets/avatars/sponsor.png`),
         imageWidth: 150,
         imageHeight: 150,
-        imageAlt: "Imagem desconhecida",
+        imageAlt: "Sponsor Logo",
       });
     },
 
-    generateTemplate(user) {
+    generateTemplate(sponsor) {
       return `
-          <p>${user.description}</p>
+          <h4>${sponsor.donation} €</h4>
           <p>
-          <b>Nome:</b> ${user.name} <br>
-          <b>País:</b> ${user.location.country}
+          <b>Nome:</b> ${sponsor.name} <br>
+          <b>Contacto:</b> ${sponsor.contato}
+          <b>Animal patrocionado:</b> ${sponsor.animal}
           </p>
         `;
     },
-    formatDate: (d) => {
-      const newDate = new Date(Date.parse(d));
-      return newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
-    },
-    removeUser(id) {
+    removeSponsor(id) {
       this.$confirm("Se sim, clique em OK", "Deseja mesmo remover o sponsor?", "warning", { confirmButtonText: "OK", cancelButtonText: "Cancelar" }).then(
         () => {
-          this.$store.dispatch(`sponsor/${REMOVE_USER}`, id).then(() => {
+          this.$store.dispatch(`sponsor/${REMOVE_SPONSOR}`, id).then(() => {
             this.$alert(this.getMessage, "Sponsor removido!", "success");
             this.fetchSponsors();
           });

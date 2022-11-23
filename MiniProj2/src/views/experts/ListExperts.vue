@@ -7,7 +7,7 @@
       <b-row class="mb-4">
         <b-col cols="1"></b-col>
         <b-col>
-          <router-link :to="{ name: 'addUser' }" tag="button" class="btn btn-outline-success mr-2 mt-2">
+          <router-link :to="{ name: 'addExpert' }" tag="button" class="btn btn-outline-success mr-2 mt-2">
             <i class="fas fa-plus-square"></i>
             ADICIONAR EXPERT
           </router-link>
@@ -37,20 +37,20 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="user of users" :key="user._id">
-                <td class="pt-4">{{ user.name }}</td>
-                <td class="pt-4">{{ user.type === "admin" ? "Administrador" : "Utilizador normal" }}</td>
-                <td class="pt-4">{{ formatDate(user.registration_date) }}</td>
+              <tr v-for="expert of experts" :key="expert._id">
+                <td class="pt-4">{{ expert.name }}</td>
+                <td class="pt-4">{{ expert.contato }}</td>
+                <td class="pt-4">{{ expert.especialidade }}</td>
                 <td>
-                  <router-link :to="{ name: 'editUser', params: { userId: user._id } }" tag="button" class="btn btn-outline-success mr-2">
+                  <router-link :to="{ name: 'editExpert', params: { expertId: expert._id } }" tag="button" class="btn btn-outline-success mr-2">
                     <i class="fas fa-edit"></i>
                     EDITAR
                   </router-link>
-                  <button @click="viewUser(user._id)" type="button" class="btn btn-outline-success mr-2">
+                  <button @click="viewExpert(expert._id)" type="button" class="btn btn-outline-success mr-2">
                     <i class="fas fa-search"></i>
                     VER
                   </button>
-                  <button @click="removeUser(user._id)" type="button" class="btn btn-outline-danger mr-2 ">
+                  <button @click="removeExpert(expert._id)" type="button" class="btn btn-outline-danger mr-2 ">
                     <i class="fas fa-trash-alt"></i>
                     REMOVER
                   </button>
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { FETCH_USERS, REMOVE_USER } from "@/store/users/user.constants";
+import { FETCH_USERS, REMOVE_USER } from "@/store/experts/expert.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import { mapGetters } from "vuex";
 
@@ -77,18 +77,18 @@ export default {
   },
   data: function() {
     return {
-      users: [],
+      experts: [],
       sortType: 1,
     };
   },
   computed: {
-    ...mapGetters("user", ["getUsers", "getMessage"]),
+    ...mapGetters("expert", ["getExperts", "getMessage"]),
   },
   methods: {
     fetchExperts() {
       this.$store.dispatch(`expert/${FETCH_USERS}`).then(
         () => {
-          this.users = this.getUsers;
+          this.experts = this.getExperts;
         },
         (err) => {
           this.$alert(`${err.message}`, "Erro", "error");
@@ -96,7 +96,7 @@ export default {
       );
     },
     sort() {
-      this.users.sort(this.compareNames);
+      this.experts.sort(this.compareNames);
       this.sortType *= -1;
     },
     compareNames(u1, u2) {
@@ -105,29 +105,28 @@ export default {
       else return 0;
     },
 
-    viewUser(id) {
-      const user = this.users.find((user) => user._id === id);
+    viewExpert(id) {
+      const expert = this.experts.find((expert) => expert._id === id);
       this.$fire({
-        title: user.auth.username,
-        html: this.generateTemplate(user),
-        imageUrl: require(`@/assets/avatars/${this.getUserLevelByPoints(user.gamification.points).avatar}.png`),
+        title: expert.auth.expertname,
+        html: this.generateTemplate(expert),
+        imageUrl: require(`@/assets/avatars/expert.png`),
         imageWidth: 150,
         imageHeight: 150,
-        imageAlt: "Imagem desconhecida",
+        imageAlt: "Expert Logo",
       });
     },
 
-    generateTemplate(user) {
+    generateTemplate(expert) {
       return `
-          <p>${user.description}</p>
+          <p>${expert.especialidade}</p>
           <p>
-          <b>Nome:</b> ${user.name} <br>
-          <b>Cidade:</b> ${user.location.city}<br>
-          <b>País:</b> ${user.location.country}
+          <b>Nome:</b> ${expert.name} <br>
+          <b>Contacto:</b> ${expert.contato}
           </p>
         `;
     },
-    removeUser(id) {
+    removeExpert(id) {
       this.$confirm("Se sim, clique em OK", "Deseja mesmo remover o expert?", "warning", { confirmButtonText: "OK", cancelButtonText: "Cancelar" }).then(
         () => {
           this.$store.dispatch(`expert/${REMOVE_USER}`, id).then(() => {

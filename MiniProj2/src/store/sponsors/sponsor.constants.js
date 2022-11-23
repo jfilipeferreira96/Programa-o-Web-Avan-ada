@@ -1,13 +1,13 @@
 // Get types
 
 // Action types
-export const FETCH_QUIZZES = "fetchQuizzes";
-export const ADD_QUIZ = "addQuiz";
-export const EDIT_QUIZ = "editQuiz";
-export const REMOVE_QUIZ = "removeQuiz";
+export const FETCH_SPONSORS  = "fetchSponsors";
+export const ADD_SPONSOR = "addSponsor";
+export const EDIT_SPONSOR = "editSponsor";
+export const REMOVE_SPONSOR = "removeSponsor";
 
 
 
 // Mutation types
-export const SET_QUIZZES = "setQuizzes";
+export const SET_SPONSORS = "setSponsors";
 export const SET_MESSAGE = "setMessage";

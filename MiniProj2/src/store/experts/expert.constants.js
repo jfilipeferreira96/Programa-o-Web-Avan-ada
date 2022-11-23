@@ -1,13 +1,13 @@
 // Get types
 
 // Action types
-export const FETCH_QUIZZES = "fetchQuizzes";
-export const ADD_QUIZ = "addQuiz";
-export const EDIT_QUIZ = "editQuiz";
-export const REMOVE_QUIZ = "removeQuiz";
+export const FETCH_EXPERTS = "fetchExperts";
+export const ADD_EXPERT = "addExpert";
+export const EDIT_EXPERT = "editExpert";
+export const REMOVE_EXPERT = "removeExpert";
 
 
 
 // Mutation types
-export const SET_QUIZZES = "setQuizzes";
+export const SET_EXPERTS = "setExperts";
 export const SET_MESSAGE = "setMessage";

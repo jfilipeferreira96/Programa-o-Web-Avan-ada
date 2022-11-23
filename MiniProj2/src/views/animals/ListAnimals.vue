@@ -97,7 +97,7 @@ export default {
   methods: {
     fetchAnimals() {
       this.$store.dispatch(`animal/${FETCH_ANIMALS}`).then(
-        () => {
+        () =>{
           this.animals = this.getAnimals;
         },
         err => {
@@ -160,7 +160,7 @@ export default {
       );
     }
   },
-  created() {
+  created(){
     this.fetchAnimals();
   }
 };

@@ -1,34 +1,34 @@
-import quizService from "@/api/quiz.service";
+import expertService from '@/api/expert.service'
 import {
   // Actions
-  FETCH_QUIZZES,
-  ADD_QUIZ,
-  EDIT_QUIZ,
-  REMOVE_QUIZ,
+  FETCH_EXPERTS,
+  ADD_EXPERT,
+  EDIT_EXPERT,
+  REMOVE_EXPERT,
   // Mutations
-  SET_QUIZZES,
+  SET_EXPERTS,
   SET_MESSAGE,
 } from "./experts.constants";
 
 const state = {
-  quizzes: [],
+  experts: [],
   message: "",
 };
 
 const getters = {
-  getQuizzes: (state) => state.quizzes,
-  getQuizById: (state) => (id) => {
-    return state.quizzes.find((quiz) => quiz._id === id);
+  getExperts: (state) => state.experts,
+  getExpertById: (state) => (id) => {
+    return state.experts.find((expert) => expert._id === id);
   },
   getMessage: (state) => state.message,
 };
 
 const actions = {
-  [FETCH_QUIZZES]: async ({ commit, rootState }) => {
+  [FETCH_EXPERTS]: async ({ commit, rootState }) => {
     return new Promise((resolve, reject) => {
-      quizService.getQuizzes(rootState.auth.token).then(
+      expertService.getExperts(rootState.auth.token).then(
         (res) => {
-          commit(SET_QUIZZES, res.body);
+          commit(SET_EXPERTS, res.body);
           resolve(res);
         },
         (err) => {
@@ -38,9 +38,9 @@ const actions = {
       );
     });
   },
-  [ADD_QUIZ]: ({ commit, rootState }, payload) => {
+  [ADD_EXPERT]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      quizService.addQuiz(rootState.auth.token, payload).then(
+      expertService.addExpert(rootState.auth.token, payload).then(
         (res) => {
           commit(SET_MESSAGE, "sucesso!");
           resolve(res.body);
@@ -52,9 +52,9 @@ const actions = {
       );
     });
   },
-  [EDIT_QUIZ]: ({ commit, rootState }, payload) => {
+  [EDIT_EXPERT]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      quizService.editQuiz(rootState.auth.token, payload).then(
+      expertService.editExpert(rootState.auth.token, payload).then(
         (res) => {
           commit(SET_MESSAGE, "sucesso!");
           resolve(res);
@@ -66,9 +66,9 @@ const actions = {
       );
     });
   },
-  [REMOVE_QUIZ]: ({ commit, rootState }, id) => {
+  [REMOVE_EXPERT]: ({ commit, rootState }, id) => {
     return new Promise((resolve, reject) => {
-      quizService.removeQuiz(rootState.auth.token, id).then(
+      expertService.removeExpert(rootState.auth.token, id).then(
         (res) => {
           commit(SET_MESSAGE, "sucesso!");
           resolve(res);
@@ -83,8 +83,8 @@ const actions = {
 };
 
 export const mutations = {
-  [SET_QUIZZES]: (state, quizzes) => {
-    state.quizzes = quizzes;
+  [SET_EXPERTS]: (state, experts) => {
+    state.experts = experts;
   },
   [SET_MESSAGE]: (state, message) => {
     state.message = message;
