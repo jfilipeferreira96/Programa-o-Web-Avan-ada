@@ -1,4 +1,4 @@
-import expertService from '@/api/expert.service'
+import expertService from "@/api/expert.service";
 import {
   // Actions
   FETCH_EXPERTS,
@@ -8,7 +8,7 @@ import {
   // Mutations
   SET_EXPERTS,
   SET_MESSAGE,
-} from "./experts.constants";
+} from "./expert.constants";
 
 const state = {
   experts: [],
