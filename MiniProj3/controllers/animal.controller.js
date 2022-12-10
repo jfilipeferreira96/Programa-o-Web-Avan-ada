@@ -7,7 +7,7 @@ exports.get = (req, res) => {
     .populate("comments.user", "name")
     .exec((error, animals) => {
       if (error) throw error;
-
+      
       let message = AnimalMessages.success.s2;
 
       if (animals.length < 0) message = AnimalMessages.success.s5;
@@ -20,7 +20,7 @@ exports.get = (req, res) => {
 exports.create = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log(req.body);
+
   new Animal({
     name: req.body.name,
     group: req.body.group,
@@ -41,7 +41,7 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log("wetf crl");
+
   Animal.findOneAndUpdate(
     {
       _id: req.params.id,
