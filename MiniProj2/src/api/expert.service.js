@@ -1,8 +1,8 @@
 import API_URL from "./config.js";
 
-export const sponorService = {
+export const sponsorService = {
   async getExperts(token) {
-    const response = await fetch(`${API_URL}/expert`, {
+    const response = await fetch(`${API_URL}/experts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export const sponorService = {
   },
 
   async addExpert(token, payload) {
-    const response = await fetch(`${API_URL}/expert`, {
+    const response = await fetch(`${API_URL}/experts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export const sponorService = {
   },
 
   async editExpert(token, payload) {
-    const response = await fetch(`${API_URL}/expert/${payload._id}`, {
+    const response = await fetch(`${API_URL}/experts/${payload._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const sponorService = {
   },
 
   async removeExpert(token, id) {
-    const response = await fetch(`${API_URL}/expert/${id}`, {
+    const response = await fetch(`${API_URL}/experts/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -83,4 +83,4 @@ function handleResponses(code) {
   return message;
 }
 
-export default sponorService;
+export default sponsorService;

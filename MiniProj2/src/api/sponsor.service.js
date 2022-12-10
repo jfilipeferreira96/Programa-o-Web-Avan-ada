@@ -1,8 +1,8 @@
 import API_URL from "./config.js";
 
-export const sponorService = {
+export const sponsorService = {
   async getSponsors(token) {
-    const response = await fetch(`${API_URL}/sponsor`, {
+    const response = await fetch(`${API_URL}/sponsors`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export const sponorService = {
   },
 
   async addSponsor(token, payload) {
-    const response = await fetch(`${API_URL}/sponsor`, {
+    const response = await fetch(`${API_URL}/sponsors`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export const sponorService = {
   },
 
   async editSponsor(token, payload) {
-    const response = await fetch(`${API_URL}/sponsor/${payload._id}`, {
+    const response = await fetch(`${API_URL}/sponsors/${payload._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -83,4 +83,4 @@ function handleResponses(code) {
   return message;
 }
 
-export default sponorService;
+export default sponsorService;
