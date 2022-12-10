@@ -64,7 +64,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log(req.params.id);
+
   Sponsor.deleteOne(
     {
       _id: req.params.id,
@@ -80,14 +80,11 @@ exports.delete = (req, res) => {
 exports.getOne = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log("entrei");
-  console.log(req.params.id);
   Sponsor.findOne(
     {
       _id: req.params.id,
     },
     (error, sponsor) => {
-      console.log(sponsor);
       if (error) throw error;
       if (!sponsor) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
       let message = SponsorMessages.success.s2;

@@ -8,6 +8,7 @@ module.exports = {
       user: "users",
       user_levels: "user_levels",
       sponsor: "sponsors",
+      expert: "experts",
     },
   },
   auth: {

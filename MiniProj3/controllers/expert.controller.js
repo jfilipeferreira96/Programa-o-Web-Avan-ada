@@ -20,9 +20,9 @@ exports.create = (req, res) => {
 
   new Expert({
     name: req.body.name,
-    donation: req.body.donation,
+    especialidade: req.body.especialidade,
     contato: req.body.contato,
-    animal: req.body.animal,
+    links: req.body.links,
   }).save((error, expert) => {
     if (error) {
       throw error;
@@ -64,7 +64,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log(req.params.id);
+
   Expert.deleteOne(
     {
       _id: req.params.id,
@@ -86,7 +86,6 @@ exports.getOne = (req, res) => {
       _id: req.params.id,
     },
     (error, expert) => {
-      console.log(expert);
       if (error) throw error;
       if (!expert) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
       let message = ExpertMessages.success.s2;

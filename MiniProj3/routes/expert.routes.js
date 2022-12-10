@@ -8,7 +8,7 @@ const AuthController = require("../controllers/auth.controller");
 router
   .route("/")
   .get(AuthController.checkAuth, ExpertController.get)
-  .post(AuthController.checkAuth, [body("name").isString(), body("contato").isString(), body("especialidade").isString(), body("links.*.url").isURL()], ExpertController.create);
+  .post(AuthController.checkAuth, [body("name").isString(), body("contato").isString(), body("especialidade").isString(), body("links.*.types").isAlpha(), body("links.*.url").isURL()], ExpertController.create);
 
 router.route("/deactivate/:id").put(AuthController.checkAuth, [param("id").isMongoId()], ExpertController.deactivate);
 

@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const QuizMessages = require("../messages/quiz.messages");
 
 exports.get = (req, res) => {
-  console.log("ENTREI Quiz LIST");
+  
   Quiz.find(req.query)
     .populate("questions")
     .exec((error, quizzes) => {
@@ -20,7 +20,7 @@ exports.get = (req, res) => {
 exports.create = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log(req.body);
+  
   new Quiz({
     name: req.body.name,
     points: req.body.points,

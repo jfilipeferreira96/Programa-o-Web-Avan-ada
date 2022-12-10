@@ -8,6 +8,7 @@ const expertSchema = new Schema({
   especialidade: String,
   links: [
     {
+      types: String,
       url: String,
     },
   ],
