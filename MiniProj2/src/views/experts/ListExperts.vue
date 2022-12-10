@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { FETCH_USERS, REMOVE_USER } from "@/store/experts/expert.constants";
+import { FETCH_EXPERTS, REMOVE_EXPERT } from "@/store/experts/expert.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import { mapGetters } from "vuex";
 
@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     fetchExperts() {
-      this.$store.dispatch(`expert/${FETCH_USERS}`).then(
+      this.$store.dispatch(`expert/${FETCH_EXPERTS}`).then(
         () => {
           this.experts = this.getExperts;
         },
@@ -128,7 +128,7 @@ export default {
     removeExpert(id) {
       this.$confirm("Se sim, clique em OK", "Deseja mesmo remover o expert?", "warning", { confirmButtonText: "OK", cancelButtonText: "Cancelar" }).then(
         () => {
-          this.$store.dispatch(`expert/${REMOVE_USER}`, id).then(() => {
+          this.$store.dispatch(`expert/${REMOVE_EXPERT}`, id).then(() => {
             this.$alert(this.getMessage, "Expert removido!", "success");
             this.fetchExperts();
           });
