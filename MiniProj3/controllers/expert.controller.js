@@ -1,15 +1,15 @@
-const Sponsor = require("../models/sponsor.model");
+const Expert = require("../models/expert.model");
 const { validationResult } = require("express-validator");
-const SponsorMessages = require("../messages/sponsor.messages");
+const ExpertMessages = require("../messages/expert.messages");
 
 exports.get = (req, res) => {
-  Sponsor.find(req.query).exec((error, sponsors) => {
+  Expert.find(req.query).exec((error, experts) => {
     if (error) throw error;
-    let message = SponsorMessages.success.s2;
+    let message = ExpertMessages.success.s2;
 
-    if (sponsors.length < 0) message = SponsorMessages.success.s5;
+    if (experts.length < 0) message = ExpertMessages.success.s5;
 
-    message.body = sponsors;
+    message.body = experts;
     return res.status(message.http).send(message);
   });
 };
@@ -18,19 +18,19 @@ exports.create = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
 
-  new Sponsor({
+  new Expert({
     name: req.body.name,
     donation: req.body.donation,
     contato: req.body.contato,
     animal: req.body.animal,
-  }).save((error, sponsor) => {
+  }).save((error, expert) => {
     if (error) {
       throw error;
     }
-    let message = SponsorMessages.success.s0;
-    message.body = sponsor;
+    let message = ExpertMessages.success.s0;
+    message.body = expert;
     return res
-      .header("location", "/sponsors/" + sponsor._id)
+      .header("location", "/experts/" + expert._id)
       .status(message.http)
       .send(message);
   });
@@ -40,7 +40,7 @@ exports.update = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
 
-  Sponsor.findOneAndUpdate(
+  Expert.findOneAndUpdate(
     {
       _id: req.params.id,
     },
@@ -50,12 +50,12 @@ exports.update = (req, res) => {
     {
       new: true,
     },
-    (error, sponsor) => {
+    (error, expert) => {
       if (error) throw error;
-      if (!sponsor) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
+      if (!expert) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
 
-      let message = SponsorMessages.success.s1;
-      message.body = sponsor;
+      let message = ExpertMessages.success.s1;
+      message.body = expert;
       return res.status(message.http).send(message);
     }
   );
@@ -65,14 +65,14 @@ exports.delete = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
   console.log(req.params.id);
-  Sponsor.deleteOne(
+  Expert.deleteOne(
     {
       _id: req.params.id,
     },
     (error, result) => {
       if (error) throw error;
-      if (result.deletedCount <= 0) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-      return res.status(SponsorMessages.success.s3.http).send(SponsorMessages.success.s3);
+      if (result.deletedCount <= 0) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
+      return res.status(ExpertMessages.success.s3.http).send(ExpertMessages.success.s3);
     }
   );
 };
@@ -80,18 +80,17 @@ exports.delete = (req, res) => {
 exports.getOne = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log("entrei");
-  console.log(req.params.id);
-  Sponsor.findOne(
+
+  Expert.findOne(
     {
       _id: req.params.id,
     },
-    (error, sponsor) => {
-      console.log(sponsor);
+    (error, expert) => {
+      console.log(expert);
       if (error) throw error;
-      if (!sponsor) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-      let message = SponsorMessages.success.s2;
-      message.body = sponsor;
+      if (!expert) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
+      let message = ExpertMessages.success.s2;
+      message.body = expert;
       return res.status(message.http).send(message);
     }
   );
@@ -101,7 +100,7 @@ exports.activate = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
 
-  Sponsor.updateOne(
+  Expert.updateOne(
     {
       _id: req.params.id,
     },
@@ -113,8 +112,8 @@ exports.activate = (req, res) => {
     (error, result) => {
       if (error) throw error;
 
-      if (result.n <= 0) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-      return res.status(SponsorMessages.success.s6.http).send(SponsorMessages.success.s6);
+      if (result.n <= 0) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
+      return res.status(ExpertMessages.success.s6.http).send(ExpertMessages.success.s6);
     }
   );
 };
@@ -123,7 +122,7 @@ exports.deactivate = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
 
-  Sponsor.updateOne(
+  Expert.updateOne(
     {
       _id: req.params.id,
     },
@@ -135,8 +134,8 @@ exports.deactivate = (req, res) => {
     (error, result) => {
       if (error) throw error;
 
-      if (result.n <= 0) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-      return res.status(SponsorMessages.success.s4.http).send(SponsorMessages.success.s4);
+      if (result.n <= 0) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
+      return res.status(ExpertMessages.success.s4.http).send(ExpertMessages.success.s4);
     }
   );
 };
