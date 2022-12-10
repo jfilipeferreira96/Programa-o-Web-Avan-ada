@@ -3,9 +3,7 @@ const { validationResult } = require("express-validator");
 const SponsorMessages = require("../messages/sponsor.messages");
 
 exports.get = (req, res) => {
-  console.log(1);
   Sponsor.find(req.query).exec((error, sponsors) => {
-    console.log(2);
     if (error) throw error;
     let message = SponsorMessages.success.s2;
 
@@ -19,16 +17,19 @@ exports.get = (req, res) => {
 exports.create = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-  console.log("create", req.body);
+
   new Sponsor({
     name: req.body.name,
     donation: req.body.donation,
     contato: req.body.contato,
     animal: req.body.animal,
   }).save((error, sponsor) => {
-    if (error) throw error;
-    let message = QuestionMessages.success.s0;
-    message.body = question;
+    if (error) {
+      console.log(error);
+      throw error;
+    }
+    let message = SponsorMessages.success.s0;
+    message.body = sponsor;
     return res
       .header("location", "/sponsors/" + sponsor._id)
       .status(message.http)
@@ -82,18 +83,21 @@ exports.delete = (req, res) => {
 exports.getOne = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-
-  Sponsor.findOne({
-    _id: req.params.id,
-  })
-    .populate("questions")
-    .exec((error, sponsor) => {
+  console.log("entrei");
+  console.log(req.params.id);
+  Sponsor.findOne(
+    {
+      _id: req.params.id,
+    },
+    (error, sponsor) => {
+      console.log(sponsor);
       if (error) throw error;
       if (!sponsor) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
       let message = SponsorMessages.success.s2;
       message.body = sponsor;
       return res.status(message.http).send(message);
-    });
+    }
+  );
 };
 
 exports.activate = (req, res) => {
