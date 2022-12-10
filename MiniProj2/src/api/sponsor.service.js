@@ -49,7 +49,7 @@ export const sponsorService = {
   },
 
   async removeSponsor(token, id) {
-    const response = await fetch(`${API_URL}/sponsor/${id}`, {
+    const response = await fetch(`${API_URL}/sponsors/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

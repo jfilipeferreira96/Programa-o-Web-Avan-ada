@@ -23,7 +23,7 @@ export default new Vuex.Store({
     user: moduleUser,
     quiz: moduleQuiz,
     question: moduleQuestion,
-    sponsors: moduleSponsor,
-    experts: moduleExpert,
+    sponsor: moduleSponsor,
+    expert: moduleExpert,
   },
 });

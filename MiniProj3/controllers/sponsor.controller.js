@@ -66,7 +66,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const errors = validationResult(req).array();
   if (errors.length > 0) return res.status(406).send(errors);
-
+  console.log(req.params.id);
   Sponsor.deleteOne(
     {
       _id: req.params.id,
